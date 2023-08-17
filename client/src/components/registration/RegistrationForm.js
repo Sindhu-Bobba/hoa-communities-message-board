@@ -4,6 +4,9 @@ import config from "../../config";
 
 const RegistrationForm = () => {
   const [userPayload, setUserPayload] = useState({
+    userName: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     passwordConfirmation: "",
@@ -15,9 +18,38 @@ const RegistrationForm = () => {
 
   const validateInput = (payload) => {
     setErrors({});
-    const { email, password, passwordConfirmation } = payload;
+    const { userName, firstName, lastName, email, password, passwordConfirmation } = payload;
     const emailRegexp = config.validation.email.regexp;
     let newErrors = {};
+
+    if (userName.length > 36) {
+      newErrors = {
+        ...newErrors,
+        userName: "must be no more than 36 characters"
+      };
+    }
+
+    if (userName.trim() == "") {
+      newErrors = {
+        ...newErrors,
+        userName: "is required",
+      };
+    }
+
+    if (firstName.trim() == "") {
+      newErrors = {
+        ...newErrors,
+        firstName: "is required",
+      };
+    }
+
+    if (lastName.trim() == "") {
+      newErrors = {
+        ...newErrors,
+        lastName: "is required",
+      };
+    }
+
     if (!email.match(emailRegexp)) {
       newErrors = {
         ...newErrors,
@@ -89,7 +121,43 @@ const RegistrationForm = () => {
     <div className="grid-container">
       <h1>Register</h1>
       <form onSubmit={onSubmit}>
-        <div>
+      <div>
+          <label>
+            UserName
+            <input
+              type="text"
+              name="userName"
+              value={userPayload.userName}
+              onChange={onInputChange}
+            />
+            <FormError error={errors.userName} />
+          </label>
+          </div>
+          <div>
+          <label>
+            First Name
+            <input
+              type="text"
+              name="firstName"
+              value={userPayload.firstName}
+              onChange={onInputChange}
+            />
+            <FormError error={errors.firstName} />
+          </label>
+          </div>
+          <div>
+          <label>
+            Last Name
+            <input
+              type="text"
+              name="lastName"
+              value={userPayload.lastName}
+              onChange={onInputChange}
+            />
+            <FormError error={errors.lastName} />
+          </label>
+          </div>
+          <div>
           <label>
             Email
             <input type="text" name="email" value={userPayload.email} onChange={onInputChange} />
