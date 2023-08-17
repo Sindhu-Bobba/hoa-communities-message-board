@@ -7,7 +7,9 @@ import "../assets/scss/main.scss";
 import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
-import HoaCommunityList from "./HoaCommunityList";
+import CommunityList from "./CommunityList.js";
+import CommunityShow from "./CommunityShow.js";
+import CommunityForm from "./CommunityForm";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -31,7 +33,9 @@ const App = (props) => {
         <Route exact path="/">
           <h2>Welcome to HOA Communities Message Board</h2>
         </Route>
-        <Route exact path="/communities" component={HoaCommunityList} />
+        <Route exact path="/communities" component={CommunityList} />
+        <Route exact path="/communities/:id" component={CommunityShow}/>
+        <Route exact path="/communities/:id" component={CommunityForm}/>
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
       </Switch>

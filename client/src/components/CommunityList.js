@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
 
-const HoaCommunityList = props => {
+const CommunityList = props => {
     const [communityList, setCommunityList] = useState([])
     const getCommunities = async () => {
         try {
@@ -28,7 +28,7 @@ const HoaCommunityList = props => {
         return (
             <li key={community.id}>
                 <Link to={`/communities/${community.id}`}>
-                    {community.name}
+                    {community.communityName}
                 </Link>
             </li>
         )
@@ -36,11 +36,11 @@ const HoaCommunityList = props => {
 
     return (
         <div>
-            <h1>WElcome To HOA Communities Message Board</h1>
+            <h1>Welcome To HOA Communities Message Board</h1>
             <ul>
                 {communitiesList}
             </ul>
         </div>
     )
 }
-export default HoaCommunityList
+export default CommunityList
