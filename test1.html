@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Header with Image</title>
+    <style>
+        /* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Define the styles for the header */
+.page-header {
+    height: 20vh; /* 20% of the viewport height */
+    background-color: #333; /* Background color for the header */
+    display: flex;
+    align-items: center; /* Vertically center content within the header */
+    justify-content: center; /* Horizontally center content within the header */
+}
+
+/* Style the header image */
+.header-image {
+    max-width: 100%; /* Ensure the image fits within the header */
+    height: auto;
+    border-radius: 5px; /* Add rounded corners to the image */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow to the image */
+}
+
+/* Style the main content area */
+main {
+    padding: 20px; /* Add spacing to separate content from the header */
+    font-family: Arial, sans-serif; /* Set the font for the main content */
+}
+
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <img src="https://my-first-app-production.s3.amazonaws.com/1692587410237" alt="Header Image" class="header-image">
+    </header>
+    <main>
+        <!-- Your main content goes here -->
+    </main>
+</body>
+</html>

@@ -1,31 +1,41 @@
 import React, { useState } from "react"
 import { Redirect } from "react-router-dom"
 import ErrorList from "./layout/ErrorList.js"
-import PostTile from "./PostTile.js"
 import translateServerErrors from "../services/translateServerErrors.js"
+import Dropzone from "react-dropzone";
 
 const CommunityForm = (props) => {
     const [communityRecord, setCommunityRecord] = useState({
         communityName: "",
         description: "",
-        posts: []
+        image: "",
+        town: "",
+        state: ""
     })
     const [errors, setErrors] = useState([]);
     const [shouldRedirect, setShouldRedirect] = useState(false);
 
-    const addNewCommunity = async (event) => {
+    const addNewCommunity = async (newCommunity) => {
+        const communityFormData = new FormData()
+        communityFormData.append("communityName", communityRecord.communityName);
+        communityFormData.append("description", communityRecord.description);
+        communityFormData.append("image", communityRecord.image);
+        communityFormData.append("town", communityRecord.town);
+        communityFormData.append("state", communityRecord.state);
+        
         try {
-            const response = await fetch(`/api/v1/communities/${communityId}/posts`, {
+            const response = await fetch(`/api/v1/communities`, {
                 method: "POST",
-                headers: new Headers({
-                    "Content-Type": "application/json"
-                }),
-                body: JSON.stringify(event)
+                headers: {
+                    "Accept": "image/jpeg"
+                  },
+                body: communityFormData
             })
+
             if (!response.ok) {
                 if (response.status === 422) {
                     const body = await response.json()
-                    const newErrors = translateServerErrors(body.errors)
+                    const newErrors = translateServerErrors(body.error)
                     return setErrors(newErrors)
                 } else {
                     const errorMessage = `${response.status} (${response.statusText})`
@@ -33,10 +43,6 @@ const CommunityForm = (props) => {
                     throw (error)
                 }
             } else {
-                const body = await response.json()
-                const updatedPosts = communityRecord.posts.concat(body.post)
-                setErrors([])
-                setCommunityRecord({ ...communityRecord, posts: updatedPosts })
                 setShouldRedirect(true)
             }
         } catch (error) {
@@ -57,24 +63,23 @@ const CommunityForm = (props) => {
         addNewCommunity()
     }
     if (shouldRedirect) {
-        return <Redirect push to="/" />
+        return <Redirect push to="/communities" />
     }
 
+    const handleImageUpload = (acceptedSiteImage) => {
+        setCommunityRecord({
+            ...communityRecord,
+            image: acceptedSiteImage[0],
+        });
+    };
 
 
-    const postTiles = communityRecord.posts.map(post => {
-        return (
-            <PostTile
-                key={post.id}
-                {...post}
-            />
-        )
-    })
+
+    
 
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <h2>Create New Community</h2>
                 <ErrorList errors={errors} />
                 <label htmlFor="name">
                     Community Name:
@@ -95,13 +100,38 @@ const CommunityForm = (props) => {
                         value={communityRecord.description}
                     />
                 </label>
-                <button type="submit">Create Community</button>
+                <label htmlFor="town">
+                    City/Town:
+                    <textarea
+                        id="town"
+                        name="town"
+                        onChange={handleChange}
+                        value={communityRecord.town}
+                    />
+                </label>
+                <label htmlFor="state">
+                    State:
+                    <textarea
+                        id="state"
+                        name="state"
+                        onChange={handleChange}
+                        value={communityRecord.state}
+                    />
+                </label>
+
+                <Dropzone onDrop={handleImageUpload}>
+                {({ getRootProps, getInputProps }) => (
+                    <section>
+                        <div {...getRootProps()}>
+                            <input {...getInputProps()} />
+                            <p className="button">Add Community Picture (optional)</p>
+                        </div>
+                    </section>
+                )}
+            </Dropzone>
+
+            <input type="submit" value="Create Community" className="button" />
             </form>
-            <div>
-                <h1>{communityRecord.communityName}</h1>
-                <h4>Posts:</h4>
-                {postTiles}
-            </div>
         </div>
     )
 }

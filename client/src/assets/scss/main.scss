@@ -12,3 +12,139 @@
   -moz-tab-size: 4;
   tab-size: 4;
 }
+
+.page-title {
+  text-align: center;
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+.add-button-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.button {
+  text-decoration: none;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.community-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.community-item {
+  margin: 10px 0;
+}
+
+.community-link {
+  text-decoration: none;
+  font-size: 18px;
+  color: #333;
+}
+
+.community-link:hover {
+  text-decoration: underline;
+  color: #007bff;
+}
+
+/* CommunityShow.css */
+
+/* Style the header */
+.community-header {
+  padding: 80px;
+  color: #fff; /* Text color for the header */
+  background-color: #333; /* Background color for the header */
+  display: flex;
+  height: 20vh;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style the community name */
+.community-name {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Style the description */
+.community-description {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.community-town {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.community-state {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Style the content container */
+.community-image {
+  width: 100%; /* Ensure the image fits within the header */
+  height: inherit;
+  border-radius: 5px; /* Add rounded corners to the image */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow to the image */
+}
+
+
+
+/* Style the image */
+.community-image img {
+  max-width: 30%; /* Ensure the image does not exceed its container */
+  height: auto;
+  display: block; /* Remove any extra space beneath the image */
+  margin: 20px auto; /* Center the image horizontally with some spacing */
+  border-radius: 5px; /* Add rounded corners to the image */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow to the image */
+}
+
+
+
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Style for the tile container */
+.tile-container {
+  display: flex; /* Use Flexbox to create a horizontal layout */
+  justify-content: center; /* Align tiles to the left (start) of the container */
+  gap: 150px; /* Add spacing between tiles */
+  padding: 50px; /* Add padding to the container */
+}
+
+/* Style for each tile */
+.tile {
+  flex: 0 0 auto; /* Allow tiles to shrink as needed */
+  width: 150px; /* Set a fixed width for the tiles */
+  height: 150px; /* Set a fixed height for the tiles */
+  background-color: #c9b7b7; /* Background color for the tiles */
+  color: #141010; /* Text color for the tiles */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif; /* Font for the tile text */
+  font-size: 16px; /* Font size for the tile text */
+  border-radius: 10px; /* Add rounded corners to the tiles */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow to the tiles */
+}

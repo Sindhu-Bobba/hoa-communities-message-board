@@ -26,8 +26,8 @@ const CommunityList = props => {
 
     const communitiesList = communityList.map(community => {
         return (
-            <li key={community.id}>
-                <Link to={`/communities/${community.id}`}>
+            <li key={community.id} className="community-item">
+                <Link to={`/communities/${community.id}`} className="community-link">
                     {community.communityName}
                 </Link>
             </li>
@@ -36,8 +36,13 @@ const CommunityList = props => {
 
     return (
         <div>
-            <h1>Welcome To HOA Communities Message Board</h1>
-            <ul>
+            <h1 className="page-title">Welcome To HOA Communities Message Board</h1>
+            <div className="add-button-container">
+                <Link to="/new-community" className="button add-button">
+                    <h5>Add New Community</h5>
+                </Link>
+            </div>
+            <ul className="community-list">
                 {communitiesList}
             </ul>
         </div>

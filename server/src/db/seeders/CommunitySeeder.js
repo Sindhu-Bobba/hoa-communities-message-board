@@ -4,15 +4,22 @@ class CommunitySeeder {
         const communityData = [
             {
                 communityName:"Sunset Heights",
-                description: "A community for residents of Sunset Heights"
+                description: "A community for residents of Sunset Heights",
+                town: "Norwood",
+                state: "MA"
             },
             {
                 communityName:"Windsor Gardens",
-                description: "A community for residents of Windsor Gardens"
+                description: "A community for residents of Windsor Gardens",
+                town: "Quincy",
+                state: "CT"
+
             },
             {
                 communityName:"Green Meadows" ,
-                description: "A community for residents of Green Meadows"
+                description: "A community for residents of Green Meadows",
+                town: "Natick",
+                state: "ME"
             }
         ]
         for (const singleCommunity of communityData) {
