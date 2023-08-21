@@ -10,6 +10,9 @@ exports.up = async (knex) => {
         table.bigIncrements("id")
         table.string("communityName").notNullable()
         table.string("description").notNullable()
+        table.string("town").notNullable().unique()
+        table.string("state").notNullable().unique()
+        table.string("image")
         table.timestamp("createdAt").notNullable().defaultTo(knex.fn.now())
         table.timestamp("updatedAt").notNullable().defaultTo(knex.fn.now())
     })
@@ -19,5 +22,5 @@ exports.up = async (knex) => {
  * @param {Knex} knex
  */
 exports.down = (knex) => {
-    return knex.schema.dropTableIfExists("species")
+    return knex.schema.dropTableIfExists("communities")
 }

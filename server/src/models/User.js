@@ -37,6 +37,40 @@ class User extends uniqueFunc(Model) {
     };
   }
 
+  static get relationMappings() {
+    const { Post, UserCommunity, Community } = require("./index.js")
+    return {
+      posts: {
+        relation : Model.HasManyRelation,
+        modelClass:Post,
+        join: {
+          from: "users.id",
+          to: "posts.userId"
+        }
+      },
+      communities:{
+        relation: Model.ManyToManyRelation,
+        modelClass: Community,
+        join: {
+          from: "users.id",
+          through: {
+            from: "userCommunities.userId",
+            to: "userCommunities.communityId"
+          },
+          to: "communities.id"
+        }
+      },
+      userCommunities: {
+        relation: Model.HasManyRelation,
+        modelClass: UserCommunity,
+        join: {
+          from: "users.id",
+          to: "userCommunities.userId"
+        }
+      }
+    }
+  }
+
   $formatJson(json) {
     const serializedJson = super.$formatJson(json);
 

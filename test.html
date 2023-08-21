@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizontal Tile Layout</title>
+    <style>
+        /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Style for the container holding the tiles */
+        .tile-container {
+            display: flex; /* Display tiles in a row */
+            flex-wrap: nowrap; /* Prevent wrapping to the next row */
+            overflow-x: auto; /* Enable horizontal scrolling if needed */
+            gap: 10px; /* Add spacing between tiles */
+            padding: 10px; /* Add some padding around the container */
+        }
+
+        /* Style for each tile */
+        .tile {
+            flex: 0 0 calc(33.33% - 10px); /* Each tile takes up one-third of the container width with spacing */
+            background-color: #f2f2f2;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive design: Adjust tile size on smaller screens */
+        @media (max-width: 768px) {
+            .tile {
+                flex: 0 0 calc(50% - 10px); /* Each tile takes up one-half of the container width with spacing */
+            }
+        }
+
+        /* Responsive design: Adjust tile size on even smaller screens */
+        @media (max-width: 480px) {
+            .tile {
+                flex: 0 0 100%; /* Each tile takes up the full container width with no spacing */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tile-container">
+        <div class="tile">Tile 1</div>
+        <div class="tile">Tile 2</div>
+        <div class="tile">Tile 3</div>
+        <div class="tile">Tile 4</div>
+        <div class="tile">Tile 5</div>
+        <div class="tile">Tile 6</div>
+    </div>
+</body>
+</html>
