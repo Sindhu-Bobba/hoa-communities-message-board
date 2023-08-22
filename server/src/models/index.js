@@ -4,4 +4,4 @@ const Community = require("./Community.js")
 const UserCommunity = require("./UserCommunity")
 const Post = require("./Post.js")
 
-module.exports = { User, Community, UserCommunity,Post };
+module.exports = { User, Community, UserCommunity, Post };

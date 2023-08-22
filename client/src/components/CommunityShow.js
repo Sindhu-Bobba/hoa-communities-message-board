@@ -10,8 +10,8 @@ const CommunityShow = (props) => {
         state: ""
     })
 
-
     const communityId = props.match.params.id
+    const currentUser = props.user;
 
     const getCommunity = async () => {
         try {
@@ -48,14 +48,16 @@ const CommunityShow = (props) => {
             <h3 className="community-state">{community.state}</h3>
             <div className="tile-container">
 
+               
+
                 <div className="tile">
                     <Link to="/new-events">
                         New Events
                     </Link>
                 </div>
                 <div className="tile">
-                    <Link to="/discussions">
-                        Discussions
+                    <Link to={`/${communityId}/postslist`}>
+                        Posts
                     </Link>
                 </div>
 

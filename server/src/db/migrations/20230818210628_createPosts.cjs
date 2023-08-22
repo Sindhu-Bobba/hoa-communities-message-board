@@ -9,7 +9,8 @@ exports.up = async (knex) => {
     return knex.schema.createTable("posts", table => {
         table.bigIncrements("id")
         table.text("content").notNullable()
-        table.text("postDate").notNullable()
+        table.date("postDate").notNullable()
+        table.string("image")
         table.bigInteger("userId").notNullable().index().unsigned().references("users.id")
         table.bigInteger("communityId").notNullable().index().unsigned().references("communities.id")
         table.timestamp("createdAt").notNullable().defaultTo(knex.fn.now())

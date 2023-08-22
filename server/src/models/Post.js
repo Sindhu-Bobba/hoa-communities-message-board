@@ -11,6 +11,7 @@ class Post extends Model {
             properties: {
                 content: { type: "string" },
                 postDate: { type: ["string", "integer"] },
+                image: { type: "string" },
                 userId: { type: ["string", "integer"] },
                 communityId: {type: ["string", "integer"] }
             },
