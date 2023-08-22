@@ -1,4 +1,4 @@
-import { Community } from "../../models/index.js";
+import { Community, User } from "../../models/index.js";
 class CommunitySeeder {
     static async seed() {
         const communityData = [

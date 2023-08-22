@@ -10,8 +10,11 @@ const CommunityForm = (props) => {
         description: "",
         image: "",
         town: "",
-        state: ""
+        state: "",
+        
     })
+
+    
     const [errors, setErrors] = useState([]);
     const [shouldRedirect, setShouldRedirect] = useState(false);
 

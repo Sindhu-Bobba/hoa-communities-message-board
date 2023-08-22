@@ -3,11 +3,9 @@ import { Community } from "../../../models/index.js"
 import cleanUserInput from "../../../services/cleanUserInput.js";
 import { ValidationError } from "objection";
 import uploadImage from "../../../services/uploadImage.js";
-import userCommunitiesRouter from "./userCommunitiesRouter.js"
+
 
 const communitiesRouter = new express.Router()
-
-communitiesRouter.use("/:communityId", userCommunitiesRouter)
 
 communitiesRouter.get("/", async (req,res) => {
     try{
@@ -31,7 +29,7 @@ communitiesRouter.get("/:id", async (req, res) => {
 
   communitiesRouter.post('/',uploadImage.single("image"), async (req, res) => {
     try {
-        const { body, user } = req;
+        const { body } = req;
         const formInput = cleanUserInput(body);
         const data = {
             ...formInput,
@@ -47,6 +45,5 @@ communitiesRouter.get("/:id", async (req, res) => {
         return res.status(500).json({ errors: error })
     }
 });
-
 
 export default communitiesRouter

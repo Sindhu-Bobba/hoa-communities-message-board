@@ -10,7 +10,9 @@ import TopBar from "./layout/TopBar";
 import CommunityList from "./CommunityList.js";
 import CommunityShow from "./CommunityShow.js";
 import CommunityForm from "./CommunityForm";
+import PostForm from "./PostForm.js";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute.js"
+import PostShow from "./PostShow.js";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -18,7 +20,7 @@ const App = (props) => {
     try {
       const user = await getCurrentUser()
       setCurrentUser(user)
-    } catch(err) {
+    } catch (err) {
       setCurrentUser(null)
     }
   }
@@ -35,8 +37,18 @@ const App = (props) => {
           <h2>Welcome to HOA Communities Message Board</h2>
         </Route>
         <Route exact path="/communities" component={CommunityList} />
-        <Route exact path="/communities/:id" component={CommunityShow}/>
-        <AuthenticatedRoute exact path="/new-community" component={CommunityForm} user={currentUser}/>
+        <Route exact path="/communities/:id" component={CommunityShow} />
+        
+
+        <Route exact path="/:id/posts" render={(props) => (
+            <PostForm {...props} user={currentUser} />
+          )}
+        />
+        <Route exact path="/:communityId/postslist" component={PostShow} />
+
+
+
+        <AuthenticatedRoute exact path="/new-community" component={CommunityForm} user={currentUser} />
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
       </Switch>
