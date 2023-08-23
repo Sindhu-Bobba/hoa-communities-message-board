@@ -10,7 +10,6 @@ import TopBar from "./layout/TopBar";
 import CommunityList from "./CommunityList.js";
 import CommunityShow from "./CommunityShow.js";
 import CommunityForm from "./CommunityForm";
-import PostForm from "./PostForm.js";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute.js"
 import PostShow from "./PostShow.js";
 
@@ -40,11 +39,11 @@ const App = (props) => {
         <Route exact path="/communities/:id" component={CommunityShow} />
         
 
-        <Route exact path="/:id/posts" render={(props) => (
-            <PostForm {...props} user={currentUser} />
+       
+        <Route exact path="/:communityId/postslist" render={(props) => (
+            <PostShow {...props} user={currentUser} />
           )}
-        />
-        <Route exact path="/:communityId/postslist" component={PostShow} />
+        /> 
 
 
 

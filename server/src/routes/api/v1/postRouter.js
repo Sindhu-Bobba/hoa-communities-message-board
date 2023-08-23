@@ -12,7 +12,7 @@ postRouter.get("/:communityid/posts", async (req, res) => {
         console.log(":::::::::::::");
         const {communityid }= req.params;
         const post = await Post.query().where('communityId', communityid);
-      return res.status(200).json({ post: post })
+      return res.status(200).json({ posts: post })
     }
     catch (err) {
         console.log(err);
