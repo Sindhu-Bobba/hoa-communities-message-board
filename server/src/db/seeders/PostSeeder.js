@@ -8,12 +8,14 @@ class Postseeder {
 
         const postData = [
             {
+                title: "About Gardening",
                 content: "I'm passionate about gardening. Let's discuss the best practices for growing beautiful and healthy flowers.",
                 postDate: "2022-12-10",
                 userId: siri.id,
                 communityId: siri.id
             },
             {
+                title:"about Art",
                 content: "Share your latest artwork inspired by culture, whether it's paintings, crafts, or music.",
                 postDate: "2023-10-22",
                 userId: raksha.id,
