@@ -6,7 +6,8 @@ class CommunitySeeder {
                 communityName:"Sunset Heights",
                 description: "A community for residents of Sunset Heights",
                 town: "Norwood",
-                state: "MA"
+                state: "MA",
+                image:"building.jpeg"
             },
             {
                 communityName:"Windsor Gardens",
