@@ -42,10 +42,13 @@ const CommunityShow = (props) => {
 
             </header>
 
+            <body className= ".next-page-background">
+
             <h1 className="community-name">{community.communityName}</h1>
             <h3 className="community-description">{community.description}</h3>
             <h3 className="community-town">{community.town}</h3>
             <h3 className="community-state">{community.state}</h3>
+            </body>
             <div className="tile-container">
 
                

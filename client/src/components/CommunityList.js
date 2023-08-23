@@ -35,16 +35,16 @@ const CommunityList = props => {
     })
 
     return (
-        <div>
+        <div className ="community-list ">
             <h1 className="page-title">Welcome To HOA Communities Message Board</h1>
             <div className="add-button-container">
                 <Link to="/new-community" className="button add-button">
                     <h5>Add New Community</h5>
                 </Link>
             </div>
-            <ul className="community-list">
+            <li className="communities">
                 {communitiesList}
-            </ul>
+            </li>
         </div>
     )
 }

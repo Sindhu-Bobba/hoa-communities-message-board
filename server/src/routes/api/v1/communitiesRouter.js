@@ -27,7 +27,7 @@ communitiesRouter.get("/:id", async (req, res) => {
     }
   })
 
-  communitiesRouter.post('/',uploadImage.single("image"), async (req, res) => {
+communitiesRouter.post('/',uploadImage.single("image"), async (req, res) => {
     try {
         const { body } = req;
         const formInput = cleanUserInput(body);
@@ -42,7 +42,9 @@ communitiesRouter.get("/:id", async (req, res) => {
         if (error instanceof ValidationError) {
             return res.status(422).json({ errors: error.data })
         }
+        console.log(error)
         return res.status(500).json({ errors: error })
+        
     }
 });
 
