@@ -40,10 +40,10 @@ const PostShow = (props) => {
     useEffect(() => {
         getPost()
     }, [])
-   
-    
-        
-        
+
+
+
+
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -93,79 +93,92 @@ const PostShow = (props) => {
             console.log(error)
             console.error(`Error in fetch: ${error.message}`)
         }
+        // const handleDeleteClick = (event) => {
+        //     event.preventDefault()
+        // }
     }
-    
 
-return (
-    <div>
-        <h1>Community Discussions</h1>
-        {!isFormVisible ? (
-        <button onClick={toggleForm}>Add Post</button>
-        ) : null}
 
-        {isFormVisible ? (
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="title">
-                        <h4>
-                            Title:
-                        </h4>
-                        <input
-                            id="title"
-                            type="text"
-                            name="title"
-                            value={formData.title}
-                            onChange={handleInputChange}
-                        />
-                    </label>
+    return (
+        <div className="grid-container">
+            <h1>Community Discussions</h1>
+            <div>
+                {!isFormVisible ? (
+                    // <button onClick={toggleForm}>Add Post</button>
+                    <input type="submit" value="Add post" onClick={toggleForm} className="button" />
+                ) : null}
+                <input className="button" type="button" value="Delete" />
+                 
 
+                {isFormVisible ? (
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                            <label htmlFor="title">
+                                <h4>
+                                    Title:
+                                </h4>
+                                <input
+                                    id="title"
+                                    type="text"
+                                    name="title"
+                                    value={formData.title}
+                                    onChange={handleInputChange}
+                                />
+                            </label>
+
+                        </div>
+                        <div>
+                            <label htmlFor="content">
+                                <h4>
+                                    Post:
+                                </h4>
+                                <textarea
+                                    id="content"
+                                    type="text"
+                                    name="content"
+                                    onChange={handleInputChange}
+                                    value={formData.content}
+                                />
+                            </label>
+                        </div>
+                        <div>
+                            <label htmlFor="postDate">
+                                <h4>
+                                    postDate:
+                                </h4>
+                                <input
+                                    id="postDate"
+                                    type="text"
+                                    name="postDate"
+                                    value={formData.postDate}
+                                    onChange={handleInputChange}
+                                />
+                            </label>
+                        </div>
+                        <input type="submit" value="Add post" className="button form-button-margin" />
+                        <input type="submit" value="Cancel" className="button" onClick={toggleForm} />
+
+                    </form>
+                ) : null}
+            </div>
+
+            {!isFormVisible ? (
+
+                <div className="grid-x grid-margin-x callout primary">
+                    <ul>
+                        {posts.map((post) => (
+                            <li key={post.id}>
+                                <h2>{post.title}</h2>
+                                <p>{post.content}</p>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
-                <div>
-                    <label htmlFor="content">
-                        <h4>
-                            Post:
-                        </h4>
-                        <textarea
-                            id="content"
-                            type="text"
-                            name="content"
-                            onChange={handleInputChange}
-                            value={formData.content}
-                        />
-                    </label>
-                </div>
-                <div>
-                    <label htmlFor="postDate">
-                        <h4>
-                            postDate:
-                        </h4>
-                        <input
-                            id="postDate"
-                            type="text"
-                            name="postDate"
-                            value={formData.postDate}
-                            onChange={handleInputChange}
-                        />
-                    </label>
-                </div>
-                <input type="submit" value="Add post" className="button" />
-                <input value="Cancel" className="button" onClick={toggleForm}/>
-            </form>
-        ) : null}
+            ) : null}
+        </div>
 
 
-    {!isFormVisible ? (
-        <ul>
-            {posts.map((post) => (
-                <li key={post.id}>
-                    <h2>{post.title}</h2>
-                    <p>{post.content}</p>
-                </li>
-            ))}
-        </ul>
-        ) : null}
-    </div>
-);
+    );
 };
 
 export default PostShow;

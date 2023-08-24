@@ -24,17 +24,23 @@
   margin: 20px 0;
 }
 
+/* Define styles for elements with the class "button" */
 .button {
-  text-decoration: none;
-  padding: 8px 10px;
-  background-color: #56a0d3;
-  color: black;
+  margin-right: 20px;
+  background-color: #0c9ac5;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
   border-radius: 5px;
-  transition: background-color 0.3s;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
 }
 
+/* Define styles for the button when it's hovered over */
 .button:hover {
-  background-color: #0056b3;
+  background-color: darkblue;
 }
 
 .community-list {
@@ -143,7 +149,7 @@
   flex: 0 0 auto; /* Allow tiles to shrink as needed */
   width: 150px; /* Set a fixed width for the tiles */
   height: 150px; /* Set a fixed height for the tiles */
-  background-color: #56a0d3; /* Background color for the tiles */
+  background-color: #7bbdeb; /* Background color for the tiles */
    /* Text color for the tiles */
   display: flex;
   align-items: center;
@@ -151,32 +157,63 @@
   font-family: Arial, sans-serif; /* Font for the tile text */
   font-size: 16px; /* Font size for the tile text */
   border-radius: 10px; /* Add rounded corners to the tiles */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow to the tiles */
-}
-.community-list {
-  // background-image: url('https://tenderloin.sitedetails22.com/grfx/header1a.jpg');
-  // background-size: cover;
-  // background-repeat: no-repeat;
-  // background-position: center center; 
-  background-color: #cdd8d9;
-  // background-image: url('https://vandyke.sitedetails22.com/grfx/livingroom-img.jpg');
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-body {
- 
-  background-color: #cdd8d9;
-  background-image: url('https://vandyke.sitedetails22.com/grfx/livingroom-img.jpg');
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
   
+  a {
+    color:black;
+    font-weight: 600;
+  }
+}
 
+
+
+
+
+.community-list {
+  background-image: url('https://images.pexels.com/photos/4117878/pexels-photo-4117878.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
+  height:calc(100vh - 50px);
+  padding: 30px;
+  a {
+    color:#fff;
+    font-weight: 600;
+  }
+
+  .page-title {
+    color:#fff;
+    font-size: 36px;
+    font-weight: 600;
+  }
+  .callout.primary {
+   
+    color: #0a0a0a;
+    border-radius: 10px;
 }
-a {
-  color: black;
-  font-size: 18px;
+.grid-container{
+  background-color: #7bbdeb;
+  h1{
+    font-weight: 500;
+    font-size: 25px;
+  }
+
+  /* Change the background color on hover */
+  }
+.community{
+  
+  color:#fff;
+  font-size: 36px;
+  font-weight: 600;
+
+  
 }
+
+ 
+}
+
+
+
 
 

@@ -32,8 +32,9 @@ const App = (props) => {
     <Router>
       <TopBar user={currentUser} />
       <Switch>
-        <Route exact path="/">
-          <h2 className= "landing-page">Welcome to HOA Communities Message Board</h2>
+        <Route exact path="/" component={CommunityList} >
+          
+          
         </Route>
         <Route exact path="/communities" component={CommunityList} />
         <Route exact path="/communities/:id" component={CommunityShow} />
