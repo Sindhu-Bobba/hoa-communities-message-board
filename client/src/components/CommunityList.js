@@ -19,7 +19,7 @@ const CommunityList = props => {
         }
 
     }
-    
+
     useEffect(() => {
         getCommunities()
     }, [])
@@ -35,16 +35,24 @@ const CommunityList = props => {
     })
 
     return (
-        <div className ="community-list ">
+        <div className="community-list ">
             <h1 className="page-title">Welcome To HOA Communities Message Board</h1>
             <div className="add-button-container">
                 <Link to="/new-community" className="button add-button">
                     <h5>Add New Community</h5>
                 </Link>
             </div>
+            <h2 className="community">Communities</h2>
             <li className="communities">
                 {communitiesList}
             </li>
+            <form>
+            <input type="search" class="form-control" name="search" id="search" placeholder="Search..."/>
+
+
+            </form>
+
+
         </div>
     )
 }
