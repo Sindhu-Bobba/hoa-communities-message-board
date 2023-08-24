@@ -8,9 +8,8 @@ const PostShow = (props) => {
     const communityId = props.match.params.communityId;
     const { user } = props;
     const [errors, setErrors] = useState([]);
-    const [posts, setPosts] = useState([]); // Replace with your actual list of posts
+    const [posts, setPosts] = useState([]); 
     const [isFormVisible, setIsFormVisible] = useState(false);
-    const [shouldRedirect, setShouldRedirect] = useState(false);
 
 
     const [formData, setFormData] = useState({
@@ -78,9 +77,8 @@ const PostShow = (props) => {
                     throw (new Error(`${response.status} (${response.statusText})`))
                 }
             } else {
-                const createdPost = await response.json(); // Moved this line inside the 'if' block
-                setPosts([...posts, createdPost.post]); // Update the list of posts here
-                // Reset the form data and hide the form after successful submission
+                const createdPost = await response.json(); 
+                setPosts([...posts, createdPost.post]); 
                 setFormData({
                     title: "",
                     content: "",
