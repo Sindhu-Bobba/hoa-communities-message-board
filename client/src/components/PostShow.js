@@ -5,11 +5,14 @@ import ErrorList from "./layout/ErrorList.js"
 import { Link } from "react-router-dom"
 
 const PostShow = (props) => {
+    console.log(props)
+    const postId = props.match.params.postId
     const communityId = props.match.params.communityId;
     const { user } = props;
     const [errors, setErrors] = useState([]);
-    const [posts, setPosts] = useState([]); 
+    const [posts, setPosts] = useState([]);
     const [isFormVisible, setIsFormVisible] = useState(false);
+    const currentUser = props.user;
 
 
     const [formData, setFormData] = useState({
@@ -40,8 +43,36 @@ const PostShow = (props) => {
         getPost()
     }, [])
 
+    const deletePost = async (postId) => {
+        try {
+            const response = await fetch(`/api/v1/communities/${communityId}/posts/${postId}`, {
+                method: "DELETE",
+                headers: {
+                    Accept: "application/json",
+                }
+            })
+            if (!response.ok) {
+                const error = new Error(`${response.status} ${response.statusText}`)
+                throw error
+            }
+            const updatedPosts = posts.filter(post => post.id !== postId)
+            setPosts(updatedPosts)
+        }
+        catch (error) {
+            console.error(`Error in Fetch: ${error.message}`);
+        }
 
+    }
 
+    const handleDeleteClick = (event) => {
+        event.preventDefault()
+        if (window.confirm("Are you sure you want to delete this post?")) {
+            deletePost(postId)
+        }
+    }
+    const deleteButton = user && user.id === user.id ? (
+        <input className="button" type="button" value="Delete" onClick={handleDeleteClick} />
+    ) : null;
 
 
     const handleInputChange = (event) => {
@@ -77,8 +108,8 @@ const PostShow = (props) => {
                     throw (new Error(`${response.status} (${response.statusText})`))
                 }
             } else {
-                const createdPost = await response.json(); 
-                setPosts([...posts, createdPost.post]); 
+                const createdPost = await response.json();
+                setPosts([...posts, createdPost.post]);
                 setFormData({
                     title: "",
                     content: "",
@@ -91,10 +122,8 @@ const PostShow = (props) => {
             console.log(error)
             console.error(`Error in fetch: ${error.message}`)
         }
-        // const handleDeleteClick = (event) => {
-        //     event.preventDefault()
-        // }
     }
+
 
 
     return (
@@ -102,11 +131,8 @@ const PostShow = (props) => {
             <h1>Community Discussions</h1>
             <div>
                 {!isFormVisible ? (
-                    // <button onClick={toggleForm}>Add Post</button>
                     <input type="submit" value="Add post" onClick={toggleForm} className="button" />
                 ) : null}
-                <input className="button" type="button" value="Delete" />
-                 
 
                 {isFormVisible ? (
                     <form onSubmit={handleSubmit}>
@@ -168,6 +194,7 @@ const PostShow = (props) => {
                             <li key={post.id}>
                                 <h2>{post.title}</h2>
                                 <p>{post.content}</p>
+                                {deleteButton}
                             </li>
                         ))}
                     </ul>
