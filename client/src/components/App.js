@@ -23,11 +23,10 @@ const App = (props) => {
       setCurrentUser(null)
     }
   }
-
   useEffect(() => {
     fetchCurrentUser()
   }, [])
-
+  
   return (
     <Router>
       <TopBar user={currentUser} />
