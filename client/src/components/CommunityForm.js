@@ -11,10 +11,8 @@ const CommunityForm = (props) => {
         image: "",
         town: "",
         state: "",
-        
-    })
 
-    
+    })
     const [errors, setErrors] = useState([]);
     const [shouldRedirect, setShouldRedirect] = useState(false);
 
@@ -25,13 +23,13 @@ const CommunityForm = (props) => {
         communityFormData.append("image", communityRecord.image);
         communityFormData.append("town", communityRecord.town);
         communityFormData.append("state", communityRecord.state);
-        
+
         try {
             const response = await fetch(`/api/v1/communities`, {
                 method: "POST",
                 headers: {
                     "Accept": "image/jpeg"
-                  },
+                },
                 body: communityFormData
             })
 
@@ -58,7 +56,6 @@ const CommunityForm = (props) => {
             ...communityRecord,
             [event.currentTarget.name]: event.currentTarget.value,
         })
-
     }
 
     const handleSubmit = (event) => {
@@ -66,7 +63,7 @@ const CommunityForm = (props) => {
         addNewCommunity()
     }
     if (shouldRedirect) {
-        return <Redirect push to="/communities" />
+        return <Redirect push to="/" />
     }
 
     const handleImageUpload = (acceptedSiteImage) => {
@@ -76,65 +73,66 @@ const CommunityForm = (props) => {
         });
     };
 
-
-
-    
-
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <ErrorList errors={errors} />
-                <label htmlFor="name">
-                    Community Name:
-                    <input
-                        id="name"
-                        type="text"
-                        name="communityName"
-                        onChange={handleChange}
-                        value={communityRecord.communityName}
-                    />
-                </label>
-                <label htmlFor="description">
-                    Description:
-                    <textarea
-                        id="description"
-                        name="description"
-                        onChange={handleChange}
-                        value={communityRecord.description}
-                    />
-                </label>
-                <label htmlFor="town">
-                    City/Town:
-                    <textarea
-                        id="town"
-                        name="town"
-                        onChange={handleChange}
-                        value={communityRecord.town}
-                    />
-                </label>
-                <label htmlFor="state">
-                    State:
-                    <textarea
-                        id="state"
-                        name="state"
-                        onChange={handleChange}
-                        value={communityRecord.state}
-                    />
-                </label>
+        <div className="container">
+            <div className="container__row">
+                <div>
+                    <form onSubmit={handleSubmit}>
+                        <h2>Add New Community</h2>
+                        <ErrorList errors={errors} />
+                        <label htmlFor="name">
+                            Community Name:
+                            <input
+                                id="name"
+                                type="text"
+                                name="communityName"
+                                onChange={handleChange}
+                                value={communityRecord.communityName}
+                            />
+                        </label>
+                        <label htmlFor="description">
+                            Description:
+                            <textarea
+                                id="description"
+                                name="description"
+                                onChange={handleChange}
+                                value={communityRecord.description}
+                            />
+                        </label>
+                        <label htmlFor="town">
+                            City/Town:
+                            <textarea
+                                id="town"
+                                name="town"
+                                onChange={handleChange}
+                                value={communityRecord.town}
+                            />
+                        </label>
+                        <label htmlFor="state">
+                            State:
+                            <textarea
+                                id="state"
+                                name="state"
+                                onChange={handleChange}
+                                value={communityRecord.state}
+                            />
+                        </label>
 
-                <Dropzone onDrop={handleImageUpload}>
-                {({ getRootProps, getInputProps }) => (
-                    <section>
-                        <div {...getRootProps()}>
-                            <input {...getInputProps()} />
-                            <p className="button">Add Community Picture (optional)</p>
-                        </div>
-                    </section>
-                )}
-            </Dropzone>
+                        <Dropzone onDrop={handleImageUpload}>
+                            {({ getRootProps, getInputProps }) => (
+                                <section>
+                                    <div {...getRootProps()}>
+                                        <input {...getInputProps()} />
+                                        <p className="button">Add Community Picture (optional)</p>
+                                    </div>
+                                </section>
+                            )}
+                        </Dropzone>
 
-            <input type="submit" value="Create Community" className="button" />
-            </form>
+                        <input type="submit" value="Create Community" className="button" />
+                    </form>
+                </div>
+            </div>
         </div>
     )
 }

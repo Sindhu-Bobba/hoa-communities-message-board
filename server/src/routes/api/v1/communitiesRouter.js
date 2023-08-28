@@ -2,10 +2,15 @@ import express from "express"
 import { Community } from "../../../models/index.js"
 import cleanUserInput from "../../../services/cleanUserInput.js";
 import { ValidationError } from "objection";
+import communityPostRouter from "./communityPostRouter.js"
 import uploadImage from "../../../services/uploadImage.js";
 
 
-const communitiesRouter = new express.Router()
+
+
+const communitiesRouter = new express.Router({ mergeParams: true })
+
+communitiesRouter.use("/:communityId/posts", communityPostRouter);
 
 communitiesRouter.get("/", async (req,res) => {
     try{
