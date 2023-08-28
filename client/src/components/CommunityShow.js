@@ -15,8 +15,6 @@ const CommunityShow = (props) => {
 
     const communityId = props.match.params.id
     const currentUser = props.user;
-    // const userId = props.match.params.id
-
 
     const getCommunity = async () => {
         try {
@@ -26,8 +24,6 @@ const CommunityShow = (props) => {
             }
             const body = await response.json()
             setCommunity(body.community)
-            // setPosts([])
-            // setPosts(body.community.posts)
         } catch (err) {
             console.error(`Error in fetch: ${err.message}`)
         }
