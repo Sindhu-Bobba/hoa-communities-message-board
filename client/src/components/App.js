@@ -32,22 +32,9 @@ const App = (props) => {
     <Router>
       <TopBar user={currentUser} />
       <Switch>
-        <Route exact path="/" component={CommunityList} >
-          
-          
-        </Route>
+        <Route exact path="/" component={CommunityList} />
         <Route exact path="/communities" component={CommunityList} />
-        <Route exact path="/communities/:id" component={CommunityShow} />
-        
-
-       
-        <Route exact path="/:communityId/postslist" render={(props) => (
-            <PostShow {...props} user={currentUser} />
-          )}
-        /> 
-
-
-
+        <Route exact path="/communities/:id" render={(props) => <CommunityShow user={currentUser} {...props} />} />
         <AuthenticatedRoute exact path="/new-community" component={CommunityForm} user={currentUser} />
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />

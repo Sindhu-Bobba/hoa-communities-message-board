@@ -1,182 +1,146 @@
 import React, { useState, useEffect } from "react"
 import translateServerError from "../services/translateServerErrors.js"
-import { Redirect } from "react-router-dom"
-import ErrorList from "./layout/ErrorList.js"
-import { Link } from "react-router-dom"
+
 
 const PostShow = (props) => {
-    const communityId = props.match.params.communityId;
-    const { user } = props;
-    const [errors, setErrors] = useState([]);
-    const [posts, setPosts] = useState([]); 
-    const [isFormVisible, setIsFormVisible] = useState(false);
-
-
-    const [formData, setFormData] = useState({
+    const [newPost, setNewPost] = useState({
         title: "",
         content: "",
-        postDate: ""
+        postDate: "",
+        userId: props.userId
+
     });
+    const [errors, setErrors] = useState({})
+    const community = props.community
+    const user = props.user;
 
-    const toggleForm = () => {
-        setIsFormVisible(!isFormVisible);
-    };
 
-    const getPost = async () => {
+
+    const addNewPost = async (formData) => {
         try {
-            const response = await fetch(`/api/v1/communities/${communityId}/posts`)
-            if (!response.ok) {
-                const errorMessage = `${response.status} (${response.statusText})`
-                const error = new Error(errorMessage)
-                throw error
-            }
-            const body = await response.json()
-            setPosts(body.posts)
-        } catch (err) {
-            console.error(`Error in fetch: ${err.message}`)
-        }
-    }
-    useEffect(() => {
-        getPost()
-    }, [])
-
-
-
-
-
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
-
-    const handleSubmit = async (event) => {
-        event.preventDefault()
-        const newPost = {
-            title: formData.title,
-            content: formData.content,
-            postDate: formData.postDate
-        };
-        try {
-            const response = await fetch(`/api/v1/communities/${communityId}/posts/${user.id}`, {
+            console.log("API Endpoint:", `/api/v1/communities/${community.id}/posts/${user.id}`);
+            console.log("FormData:", formData);
+            const response = await fetch(`/api/v1/communities/${community.id}/posts`, {
                 method: "POST",
-                headers: {
+                headers: new Headers({
                     "Content-Type": "application/json",
-                },
-                body: JSON.stringify(newPost),
-            });
+                }),
+                body: JSON.stringify(formData)
+            })
 
             if (!response.ok) {
                 if (response.status === 422) {
-                    const body = await response.json();
-                    const newErrors = translateServerError(body.error);
-                    return setErrors(newErrors);
+                    const body = await response.json()
+                    const newErrors = translateServerError(body.errors)
+                    return setErrors(newErrors)
                 } else {
                     throw (new Error(`${response.status} (${response.statusText})`))
                 }
             } else {
-                const createdPost = await response.json(); 
-                setPosts([...posts, createdPost.post]); 
-                setFormData({
-                    title: "",
-                    content: "",
-                    postDate: ""
-                });
-                setIsFormVisible(false);
+                const responseBody = await response.json()
+                const postData = props.posts.concat(responseBody.newPost)
+                setErrors({})
+                props.setPosts(postData)
             }
-        } catch (error) {
-
-            console.log(error)
-            console.error(`Error in fetch: ${error.message}`)
+        } catch (err) {
+            console.error(`Error in fetch: ${err.message}`)
         }
-        // const handleDeleteClick = (event) => {
-        //     event.preventDefault()
-        // }
+    }
+
+    const handleInputChange = (event) => {
+        setNewPost({
+            ...newPost,
+            [event.currentTarget.name]: event.currentTarget.value
+        })
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        addNewPost(newPost)
+    }
+
+    const clearForm = () => {
+        setNewPost({
+            title: "",
+            content: "",
+            postDate: ""
+        })
     }
 
 
     return (
-        <div className="grid-container">
-            <h1>Community Discussions</h1>
-            <div>
-                {!isFormVisible ? (
-                    // <button onClick={toggleForm}>Add Post</button>
-                    <input type="submit" value="Add post" onClick={toggleForm} className="button" />
-                ) : null}
-                <input className="button" type="button" value="Delete" />
-                 
+        <div>
+            <div className="post-form">
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label htmlFor="title">
+                            <h4>
+                                Title:
+                            </h4>
+                            <input
+                                id="title"
+                                className="post-input"
+                                type="text"
+                                name="title"
+                                value={newPost.title}
+                                onChange={handleInputChange}
+                            />
+                        </label>
+                    </div>
 
-                {isFormVisible ? (
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            <label htmlFor="title">
-                                <h4>
-                                    Title:
-                                </h4>
-                                <input
-                                    id="title"
-                                    type="text"
-                                    name="title"
-                                    value={formData.title}
-                                    onChange={handleInputChange}
-                                />
-                            </label>
 
-                        </div>
-                        <div>
-                            <label htmlFor="content">
-                                <h4>
-                                    Post:
-                                </h4>
-                                <textarea
-                                    id="content"
-                                    type="text"
-                                    name="content"
-                                    onChange={handleInputChange}
-                                    value={formData.content}
-                                />
-                            </label>
-                        </div>
-                        <div>
-                            <label htmlFor="postDate">
-                                <h4>
-                                    postDate:
-                                </h4>
-                                <input
-                                    id="postDate"
-                                    type="text"
-                                    name="postDate"
-                                    value={formData.postDate}
-                                    onChange={handleInputChange}
-                                />
-                            </label>
-                        </div>
-                        <input type="submit" value="Add post" className="button form-button-margin" />
-                        <input type="submit" value="Cancel" className="button" onClick={toggleForm} />
+                    <div>
+                        <label htmlFor="content">
+                            <h4>
+                                Post:
+                            </h4>
+                            <textarea
+                                id="content"
+                                type="text"
+                                className="post-input"
+                                name="content"
+                                onChange={handleInputChange}
+                                value={newPost.content}
+                            />
+                        </label>
+                    </div>
 
-                    </form>
-                ) : null}
+                    <div>
+                        <label htmlFor="postDate">
+                            <h4>
+                                postDate:
+                            </h4>
+                            <input
+                                id="postDate"
+                                type="text"
+                                className="post-input"
+                                name="postDate"
+                                value={newPost.postDate}
+                                onChange={handleInputChange}
+                            />
+                        </label>
+                    </div>
+
+                    <div className="post-button-group">
+                        <input className="post-button" type="button" value="Clear Post" onClick={clearForm} />
+                        <input className="post-button" type="submit" value="Submit post" />
+                    </div>
+
+                </form>
             </div>
-
-            {!isFormVisible ? (
-
-                <div className="grid-x grid-margin-x callout primary">
-                    <ul>
-                        {posts.map((post) => (
-                            <li key={post.id}>
-                                <h2>{post.title}</h2>
-                                <p>{post.content}</p>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            ) : null}
+            <ul className="post-list">
+                {props.posts.map((post, index) => (
+                    <li key={index} className="post-item">
+                        <h4>Title: {post.title}</h4>
+                        <p>Content: {post.content}</p>
+                        <p>Post Date: {post.postDate}</p>
+                    </li>
+                ))}
+            </ul>
         </div>
-
-
     );
+
+
 };
 
 export default PostShow;

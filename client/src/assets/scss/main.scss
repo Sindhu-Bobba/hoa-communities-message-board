@@ -77,30 +77,39 @@
 }
 
 /* Style the community name */
+
+.community-container {
+  padding: 20px;
+  margin: 20px
+}
 .community-name {
-  font-size: 30px;
+  font-size: 35px;
   margin-top: 20px;
   margin-left: 20px;
+  margin-bottom: 10px;
+}
+.community-details {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
 /* Style the description */
 .community-description {
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 20px;
   margin-left: 20px;
+  margin-top: 60px;
 }
 
 
-.community-town {
-  font-size: 20px;
+.community-info{
+  font-size: 16px;
   margin-bottom: 20px;
   margin-left: 20px;
-}
-
-.community-state {
-  font-size: 20px;
-  margin-bottom: 20px;
-  margin-left: 20px;
+  margin-top: 10px;
 }
 
 /* Style the content container */
@@ -135,6 +144,27 @@
   padding: 0;
   box-sizing: border-box;
 }
+.profile-pic {
+  text-align: center;
+}
+// .profile-pic{
+//   object-fit: cover;
+//   width: 500px;
+//   height: 500px;
+//   border-radius: 100px;
+//   margin-top: 50px;
+//   margin-bottom: 10px !important;
+//   }
+  .image-border {
+    border: black 5px solid;
+    margin: 1rem;
+    justify-content: left;
+    max-width: 100%;
+    border-radius: 5px;
+    max-width: 100%;
+    height: auto;
+}
+
 
 /* Style for the tile container */
 .tile-container {
@@ -211,7 +241,51 @@
 }
 
  
+};
+
+/* PostShow.css */
+.post-form {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
 }
+
+.post-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.post-button-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+}
+
+.post-item {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+
 
 
 
